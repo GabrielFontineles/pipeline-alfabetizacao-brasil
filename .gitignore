@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.egg-info/
+
+# AWS
+.aws/
+*.pem
+*.key
+
+# Data files (não versionar dados brutos)
+*.csv
+*.parquet
+*.json
+!data/**/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
