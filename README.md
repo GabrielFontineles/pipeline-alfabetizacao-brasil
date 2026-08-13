@@ -112,3 +112,40 @@ O SQS foi escolhido por ser mais simples e econômico para o volume simulado. O 
 - Lambda com trigger automático no SQS
 - Processamento em lotes de até 5 mensagens
 - 20 eventos simulados processados com 100% de sucesso
+
+---
+
+## Qualidade de Dados
+
+O script `quality/data_quality.py` executa 8 checks automatizados:
+
+| Check | Resultado |
+|---|---|
+| Completude — bronze/uf | ✅ 0 nulos |
+| Duplicidade — bronze/uf | ✅ 0 duplicatas |
+| Consistência — bronze/uf | ✅ 0 violações |
+| Completude — bronze/municipio | ✅ 0 nulos |
+| Duplicidade — bronze/municipio | ✅ 0 duplicatas |
+| Completude — silver/uf | ✅ 0 nulos |
+| Completude — silver/municipio | ✅ 0 nulos |
+| Integridade — municipio → meta | ⚠️ 198 municípios sem meta |
+
+> **Nota**: Os 198 municípios sem correspondência de meta é uma característica real dos dados — municípios com participação insuficiente não recebem metas individualizadas pelo programa nacional. Não representa erro no pipeline.
+
+---
+
+## Monitoramento
+
+Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
+
+| Métrica | Valor |
+|---|---|
+| RegistrosIngeridos | 35.898 registros totais |
+| QualidadeChecksFalhos | 1 (esperado) |
+| QualidadeTaxaSucesso | 87.5% |
+| StreamingEventosEnviados | 20 |
+| StreamingTaxaProcessamento | 100% |
+
+### Alarmes configurados
+- **Pipeline-QualidadeDados-Falha**: dispara quando checks de qualidade falham
+- **Pipeline-Ingestao-Falha**: dispara quando ingestão batch falha
