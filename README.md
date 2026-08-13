@@ -92,3 +92,23 @@ Script Python → SQS → Lambda → S3 Bronze/streaming/
 - **evolucao_temporal**: variação 2023→2024 por estado com tendência
 - **analise_municipal**: agregação municipal por UF com percentual de municípios críticos
 - Bucket: `pipeline-alfabetizacao-gold`
+
+---
+
+## Pipeline de Streaming
+
+Simula a chegada de novos resultados de avaliações em tempo quase real:
+
+simulate_stream.py → SQS (pipeline-alfabetizacao-stream)
+→ Lambda (pipeline-alfabetizacao-stream-processor)
+→ S3 Bronze/streaming/ano={ano}/uf={uf}/
+
+
+### Decisão arquitetural — SQS vs Kinesis
+O SQS foi escolhido por ser mais simples e econômico para o volume simulado. O Kinesis seria necessário apenas para milhões de eventos por segundo — fora do escopo deste projeto.
+
+### Características
+- Eventos particionados por ano e UF
+- Lambda com trigger automático no SQS
+- Processamento em lotes de até 5 mensagens
+- 20 eventos simulados processados com 100% de sucesso
