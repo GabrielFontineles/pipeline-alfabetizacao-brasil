@@ -21,3 +21,51 @@ Todos os dados são provenientes da plataforma **Base dos Dados** (`basedosdados
 | `municipio` | 23.995 | Taxa de alfabetização por município |
 | `meta_alfabetizacao_municipio` | 10.704 | Metas 2024-2030 por município |
 | `aluno` | ~256MB | Microdados individuais (acesso via BigQuery) |
+
+---
+
+## Arquitetura da Solução
+
+Fonte: Base dos Dados (basedosdados.org)
+│
+▼
+┌─────────────────────────────────────────────┐
+│ INGESTÃO BATCH │
+│ Python + boto3 → S3 Bronze (Parquet) │
+└─────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────┐
+│ BRONZE LAYER (S3) │
+│ Dados brutos particionados por data │
+└─────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────┐
+│ SILVER LAYER (S3) │
+│ Limpeza, padronização e integração │
+└─────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────┐
+│ GOLD LAYER (S3) │
+│ Datasets analíticos prontos para uso │
+└─────────────────────────────────────────────┘
+
+STREAMING (paralelo):
+Script Python → SQS → Lambda → S3 Bronze/streaming/
+
+
+---
+
+## Stack Tecnológico
+
+| Componente | Tecnologia | Justificativa |
+|---|---|---|
+| Cloud | AWS | Disponibilidade, maturidade e ecossistema |
+| Storage | Amazon S3 | Serverless, durável, custo baixo |
+| Processamento | Python + boto3 | Flexibilidade e integração nativa com AWS |
+| Streaming | SQS + Lambda | Serverless, sem custo fixo, escalável |
+| Formato | Parquet | 70% menor que CSV, leitura colunar eficiente |
+| Monitoramento | CloudWatch | Nativo AWS, sem infraestrutura adicional |
+| Versionamento | Git + GitHub | Rastreabilidade e colaboração |
