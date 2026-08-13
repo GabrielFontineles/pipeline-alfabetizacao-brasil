@@ -69,3 +69,26 @@ Script Python → SQS → Lambda → S3 Bronze/streaming/
 | Formato | Parquet | 70% menor que CSV, leitura colunar eficiente |
 | Monitoramento | CloudWatch | Nativo AWS, sem infraestrutura adicional |
 | Versionamento | Git + GitHub | Rastreabilidade e colaboração |
+
+---
+
+## Arquitetura Medalhão
+
+### Bronze Layer — Dados Brutos
+- Dados ingeridos sem transformações
+- Formato Parquet particionado por `ingestao_date`
+- Histórico completo preservado
+- Bucket: `pipeline-alfabetizacao-bronze`
+
+### Silver Layer — Dados Tratados
+- Limpeza de valores nulos
+- Padronização de tipos e categorias
+- Integração entre tabelas (resultado real + metas)
+- Nova coluna `distancia_meta_2030` calculada
+- Bucket: `pipeline-alfabetizacao-silver`
+
+### Gold Layer — Camada Analítica
+- **ranking_estados**: ranking nacional por taxa de alfabetização com situação em relação à meta 2030
+- **evolucao_temporal**: variação 2023→2024 por estado com tendência
+- **analise_municipal**: agregação municipal por UF com percentual de municípios críticos
+- Bucket: `pipeline-alfabetizacao-gold`
