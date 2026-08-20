@@ -172,3 +172,22 @@ Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
 | **Total** | **$0 de $50 disponíveis** |
 
 > O projeto foi concluído com **custo zero** dentro do orçamento do AWS Academy Learner Lab, demonstrando que arquiteturas serverless bem planejadas eliminam desperdício de recursos.
+
+---
+
+## Potencial para Inteligência Artificial
+
+A camada Gold está preparada para alimentar modelos de ML e análises avançadas:
+
+### Modelos preditivos
+- **Predição de alfabetização**: usar dados históricos de UF e município para prever taxa futura e antecipar municípios em risco
+- **Detecção de anomalias**: identificar quedas abruptas de desempenho — como a queda de 19 pontos do RS entre 2023 e 2024
+
+### Análise de desigualdade
+- **Clustering de vulnerabilidade**: agrupar municípios por perfil educacional para direcionar políticas públicas com mais precisão
+- **Gap regional**: o Ceará (85%) versus estados mais vulneráveis (~35%) representa uma desigualdade de 50 pontos percentuais que pode ser modelada e explicada
+
+### Políticas públicas baseadas em dados
+- Identificar quais fatores socioeconômicos mais influenciam a taxa de alfabetização
+- Simular o impacto de intervenções educacionais por região
+- Priorizar alocação de recursos nos 198 municípios sem meta definida
