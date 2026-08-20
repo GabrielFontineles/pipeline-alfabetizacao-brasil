@@ -149,3 +149,26 @@ Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
 ### Alarmes configurados
 - **Pipeline-QualidadeDados-Falha**: dispara quando checks de qualidade falham
 - **Pipeline-Ingestao-Falha**: dispara quando ingestão batch falha
+
+---
+
+## FinOps — Otimização de Custos
+
+| Decisão | Impacto |
+|---|---|
+| Parquet em vez de CSV | Redução de ~70% no armazenamento |
+| Serverless (Lambda, SQS) | Zero custo fixo — paga só pelo uso |
+| Sem EC2 | Elimina custo de instâncias paradas |
+| Particionamento por data/UF | Queries mais baratas e rápidas |
+| Sem Glue/EMR | Evita custo de clusters gerenciados |
+
+### Custo real do projeto
+| Serviço | Custo estimado |
+|---|---|
+| S3 (3 buckets) | ~$0.50 |
+| Lambda (execuções) | ~$0.00 |
+| SQS (20 mensagens) | ~$0.00 |
+| CloudWatch (métricas) | ~$0.50 |
+| **Total** | **$0 de $50 disponíveis** |
+
+> O projeto foi concluído com **custo zero** dentro do orçamento do AWS Academy Learner Lab, demonstrando que arquiteturas serverless bem planejadas eliminam desperdício de recursos.
