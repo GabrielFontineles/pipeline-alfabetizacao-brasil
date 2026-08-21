@@ -191,3 +191,74 @@ A camada Gold está preparada para alimentar modelos de ML e análises avançada
 - Identificar quais fatores socioeconômicos mais influenciam a taxa de alfabetização
 - Simular o impacto de intervenções educacionais por região
 - Priorizar alocação de recursos nos 198 municípios sem meta definida
+
+---
+
+## Como Executar
+
+### Pré-requisitos
+- Python 3.12+
+- Conta AWS com credenciais configuradas
+- Arquivos CSV da Base dos Dados em `data/raw/`
+
+### Instalação
+```bash
+pip install boto3 pandas pyarrow awscli
+```
+
+### Execução da pipeline completa
+```bash
+# 1. Ingestão Batch → Bronze Layer
+python pipeline/ingestion/batch/ingest_batch.py
+
+# 2. Transformação → Silver Layer
+python pipeline/silver/silver_layer.py
+
+# 3. Agregação → Gold Layer
+python pipeline/gold/gold_layer.py
+
+# 4. Streaming simulado
+python pipeline/ingestion/streaming/simulate_stream.py
+
+# 5. Deploy da Lambda (primeira vez apenas)
+python pipeline/ingestion/streaming/deploy_lambda.py
+
+# 6. Validação de qualidade
+python quality/data_quality.py
+
+# 7. Monitoramento CloudWatch
+python monitoring/cloudwatch_alerts.py
+```
+
+---
+
+## Estrutura do Repositório
+
+pipeline-alfabetizacao-brasil/
+├── pipeline/
+│ ├── ingestion/
+│ │ ├── batch/
+│ │ │ └── ingest_batch.py
+│ │ └── streaming/
+│ │ ├── simulate_stream.py
+│ │ ├── lambda_processor.py
+│ │ └── deploy_lambda.py
+│ ├── silver/
+│ │ └── silver_layer.py
+│ └── gold/
+│ └── gold_layer.py
+├── quality/
+│ └── data_quality.py
+├── monitoring/
+│ └── cloudwatch_alerts.py
+├── data/
+│ └── raw/
+└── README.md
+
+
+---
+
+## Equipe
+
+Projeto desenvolvido como Tech Challenge — Fase 2
+Pós-Tech FIAP — Engenharia de Dados
