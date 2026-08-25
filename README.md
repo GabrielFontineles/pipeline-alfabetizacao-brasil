@@ -140,7 +140,7 @@ Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
 
 | Métrica | Valor |
 |---|---|
-| RegistrosIngeridos | 35.898 registros totais |
+| RegistrosIngeridos | 34.898 registros totais |
 | QualidadeChecksFalhos | 1 (esperado) |
 | QualidadeTaxaSucesso | 87.5% |
 | StreamingEventosEnviados | 20 |
