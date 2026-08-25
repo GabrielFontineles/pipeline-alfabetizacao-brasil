@@ -275,3 +275,19 @@ Pós-Tech FIAP — Engenharia de Dados
 
 Projeto desenvolvido como Tech Challenge — Fase 2
 Pós-Tech FIAP — Data Engineering
+
+---
+
+## Decisões Arquiteturais — Trade-offs
+
+### Batch vs Streaming
+O batch processa dados históricos completos periodicamente — ideal para as tabelas do INEP que são publicadas anualmente. O streaming simula a chegada de novos resultados em tempo quase real — útil para futuras integrações com sistemas de avaliação contínua. A combinação híbrida cobre ambos os cenários sem custo fixo adicional.
+
+### Data Lake vs Data Warehouse
+Optamos por Data Lake (S3 + Athena) em vez de Data Warehouse (Redshift) pelos seguintes motivos: custo zero de armazenamento no volume do projeto, schema-on-read permite flexibilidade na evolução dos dados, e o formato Parquet com particionamento entrega performance comparável a um DW para as queries analíticas necessárias.
+
+### Custo vs Performance
+A escolha serverless (Lambda, SQS, Athena) sacrifica latência de cold start em troca de custo zero quando ocioso. Para um pipeline educacional com execução diária/anual, essa troca é amplamente favorável — o projeto inteiro custou $0 de $50 disponíveis.
+
+### Decisão de escopo das fontes
+A tabela `aluno` (256MB) é acessível apenas via BigQuery por volume. A Meta Alfabetização Brasil não existe como tabela separada na Base dos Dados — foi derivada na camada Gold como agregação nacional. Ambas as decisões estão documentadas e justificadas.
