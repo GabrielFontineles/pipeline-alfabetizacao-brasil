@@ -262,3 +262,16 @@ pipeline-alfabetizacao-brasil/
 
 Projeto desenvolvido como Tech Challenge — Fase 2
 Pós-Tech FIAP — Engenharia de Dados
+
+## Equipe
+
+| Nome | GitHub |
+|---|---|
+| Gabriel Fontineles | @GabrielFontineles |
+| Gabriel Kendy Sato | — |
+| Josilene Afonso | — |
+| Katia Costa | — |
+| Yasmim Oliveira | — |
+
+Projeto desenvolvido como Tech Challenge — Fase 2
+Pós-Tech FIAP — Data Engineering
