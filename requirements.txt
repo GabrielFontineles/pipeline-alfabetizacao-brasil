@@ -1,0 +1,6 @@
+boto3==1.35.0
+pandas==2.2.0
+pyarrow==15.0.0
+awscli==1.32.0
+google-cloud-bigquery==3.17.0
+basedosdados==2.0.0
