@@ -291,3 +291,24 @@ A escolha serverless (Lambda, SQS, Athena) sacrifica latência de cold start em 
 
 ### Decisão de escopo das fontes
 A tabela `aluno` (256MB) é acessível apenas via BigQuery por volume. A Meta Alfabetização Brasil não existe como tabela separada na Base dos Dados — foi derivada na camada Gold como agregação nacional. Ambas as decisões estão documentadas e justificadas.
+
+---
+
+## Atualizações Recentes
+
+### Correções aplicadas após revisão do grupo
+
+**Fix: Integração de metas corrigida**
+O join entre indicadores e metas usava a coluna `rede` que tinha valores incompatíveis entre as tabelas. Corrigido para join por `ano` + localidade. Resultado: metas 100% preenchidas na UF e 96.5% no município.
+
+**Fix: Partições dinâmicas**
+Scripts Silver e Gold agora descobrem automaticamente a partição mais recente no S3, eliminando datas fixas no código que quebravam em execuções futuras.
+
+**Feat: Streaming atravessa as camadas**
+Novo script `silver_streaming.py` consolida os eventos JSON do Bronze/streaming na Silver, mantendo dados simulados separados dos indicadores oficiais.
+
+**Feat: Dataset visao_brasil na Gold**
+Novo 4º dataset analítico com agregação nacional por ano — taxa média, mediana, amplitude e distância média da meta 2030.
+
+### Insight revelado após correção
+Com a integração de metas corrigida, o **Ceará já atingiu a meta nacional de 2030** (85.31% vs meta de 80%) — dado que só se tornou visível após o fix.
