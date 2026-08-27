@@ -27,28 +27,21 @@ Todos os dados são provenientes da plataforma **Base dos Dados** (`basedosdados
 ## Arquitetura da Solução
 
 
+
 ```mermaid
 flowchart TD
-    A[Base dos Dados
-basedosdados.org] -->|Ingestão Batch - Python + boto3| B
-    B[BRONZE LAYER - S3
-Dados brutos - Parquet particionado por data]
-    B --> C
-    C[SILVER LAYER - S3
-Limpeza, padronização e integração]
-    C --> D
-    D[GOLD LAYER - S3
-Ranking · Evolução · Municipal · Visão Brasil]
-    E[Gerador de Eventos
-Python - Simulação] -->|Streaming| F
-    F[SQS
-Fila de mensagens] --> G
-    G[Lambda
-Processamento em lotes] --> B
+    A[Base dos Dados - basedosdados.org] -->|Ingestao Batch - Python + boto3| B
+    B[BRONZE LAYER - S3 - Dados brutos - Parquet] --> C
+    C[SILVER LAYER - S3 - Limpeza e integracao] --> D
+    D[GOLD LAYER - S3 - Ranking · Evolucao · Municipal · Brasil]
+    E[Gerador de Eventos - Python] -->|Streaming| F
+    F[SQS - Fila de mensagens] --> G
+    G[Lambda - Processamento em lotes] --> B
     style B fill:#7b3f00,color:#fff
-    style C fill:#555,color:#fff
+    style C fill:#555555,color:#fff
     style D fill:#856404,color:#fff
 ```
+
 
 
 ---
