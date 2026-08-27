@@ -220,6 +220,9 @@ python pipeline/gold/gold_layer.py
 # 4. Streaming simulado
 python pipeline/ingestion/streaming/simulate_stream.py
 
+# 4b. Consolida eventos na Silver
+python pipeline/silver/silver_streaming.py
+
 # 5. Deploy da Lambda (primeira vez apenas)
 python pipeline/ingestion/streaming/deploy_lambda.py
 
@@ -244,7 +247,8 @@ pipeline-alfabetizacao-brasil/
 │ │ ├── lambda_processor.py
 │ │ └── deploy_lambda.py
 │ ├── silver/
-│ │ └── silver_layer.py
+│ │ ├── silver_layer.py
+│ │ └── silver_streaming.py
 │ └── gold/
 │ └── gold_layer.py
 ├── quality/
@@ -261,7 +265,7 @@ pipeline-alfabetizacao-brasil/
 ## Equipe
 
 Projeto desenvolvido como Tech Challenge — Fase 2
-Pós-Tech FIAP — Engenharia de Dados
+Pós-Tech FIAP — IA Scientist
 
 ## Equipe
 
