@@ -26,34 +26,29 @@ Todos os dados são provenientes da plataforma **Base dos Dados** (`basedosdados
 
 ## Arquitetura da Solução
 
-Fonte: Base dos Dados (basedosdados.org)
-│
-▼
-┌─────────────────────────────────────────────┐
-│ INGESTÃO BATCH │
-│ Python + boto3 → S3 Bronze (Parquet) │
-└─────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────┐
-│ BRONZE LAYER (S3) │
-│ Dados brutos particionados por data │
-└─────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────┐
-│ SILVER LAYER (S3) │
-│ Limpeza, padronização e integração │
-└─────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────┐
-│ GOLD LAYER (S3) │
-│ Datasets analíticos prontos para uso │
-└─────────────────────────────────────────────┘
 
-STREAMING (paralelo):
-Script Python → SQS → Lambda → S3 Bronze/streaming/
+```mermaid
+flowchart TD
+    A[Base dos Dados
+basedosdados.org] -->|Ingestão Batch - Python + boto3| B
+    B[BRONZE LAYER - S3
+Dados brutos - Parquet particionado por data]
+    B --> C
+    C[SILVER LAYER - S3
+Limpeza, padronização e integração]
+    C --> D
+    D[GOLD LAYER - S3
+Ranking · Evolução · Municipal · Visão Brasil]
+    E[Gerador de Eventos
+Python - Simulação] -->|Streaming| F
+    F[SQS
+Fila de mensagens] --> G
+    G[Lambda
+Processamento em lotes] --> B
+    style B fill:#7b3f00,color:#fff
+    style C fill:#555,color:#fff
+    style D fill:#856404,color:#fff
+```
 
 
 ---
