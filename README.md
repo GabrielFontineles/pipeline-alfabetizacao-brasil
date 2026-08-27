@@ -262,13 +262,11 @@ Pós-Tech FIAP — IA Scientist
 
 ## Equipe
 
-| Nome | GitHub |
-|---|---|
-| Gabriel Fontineles | @GabrielFontineles |
-| Gabriel Kendy Sato | — |
-| Josilene Afonso | — |
-| Katia Costa | — |
-| Yasmim Oliveira | — |
+- Gabriel Fontineles
+- Gabriel Kendy Sato
+- Josilene Oliveira Afonso
+- Katia Oliveira da Silva Costa
+- Yasmim de Oliveira Coelho
 
 Projeto desenvolvido como Tech Challenge — Fase 2
 Pós-Tech FIAP — Data Engineering
