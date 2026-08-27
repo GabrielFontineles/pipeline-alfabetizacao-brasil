@@ -257,11 +257,6 @@ pipeline-alfabetizacao-brasil/
 
 ## Equipe
 
-Projeto desenvolvido como Tech Challenge — Fase 2
-Pós-Tech FIAP — IA Scientist
-
-## Equipe
-
 - Gabriel Fontineles
 - Gabriel Kendy Sato
 - Josilene Oliveira Afonso
@@ -269,7 +264,7 @@ Pós-Tech FIAP — IA Scientist
 - Yasmim de Oliveira Coelho
 
 Projeto desenvolvido como Tech Challenge — Fase 2
-Pós-Tech FIAP — Data Engineering
+Pós-Tech FIAP — AI Scientist
 
 ---
 
