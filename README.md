@@ -225,27 +225,32 @@ python monitoring/cloudwatch_alerts.py
 
 ## Estrutura do Repositório
 
+
+```
 pipeline-alfabetizacao-brasil/
 ├── pipeline/
-│ ├── ingestion/
-│ │ ├── batch/
-│ │ │ └── ingest_batch.py
-│ │ └── streaming/
-│ │ ├── simulate_stream.py
-│ │ ├── lambda_processor.py
-│ │ └── deploy_lambda.py
-│ ├── silver/
-│ │ ├── silver_layer.py
-│ │ └── silver_streaming.py
-│ └── gold/
-│ └── gold_layer.py
+│   ├── ingestion/
+│   │   ├── batch/
+│   │   │   └── ingest_batch.py
+│   │   └── streaming/
+│   │       ├── simulate_stream.py
+│   │       ├── lambda_processor.py
+│   │       └── deploy_lambda.py
+│   ├── silver/
+│   │   ├── silver_layer.py
+│   │   └── silver_streaming.py
+│   └── gold/
+│       └── gold_layer.py
 ├── quality/
-│ └── data_quality.py
+│   └── data_quality.py
 ├── monitoring/
-│ └── cloudwatch_alerts.py
+│   └── cloudwatch_alerts.py
 ├── data/
-│ └── raw/
+│   └── raw/
+├── run_pipeline.py
+├── requirements.txt
 └── README.md
+```
 
 
 ---
