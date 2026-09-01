@@ -96,10 +96,10 @@ simulate_stream.py → SQS (pipeline-alfabetizacao-stream)
 O SQS foi escolhido por ser mais simples e econômico para o volume simulado. O Kinesis seria necessário apenas para milhões de eventos por segundo, fora do escopo deste projeto.
 
 ### Características
-- Eventos particionados por ano e UF
-- Lambda com trigger automático no SQS
-- Processamento em lotes de até 5 mensagens
-- 20 eventos simulados processados com 100% de sucesso
+- Eventos particionados por ano e UF;
+- Lambda com trigger automático no SQS;
+- Processamento em lotes de até 5 mensagens;
+- 20 eventos simulados processados com 100% de sucesso.
 
 ---
 
