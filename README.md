@@ -63,23 +63,23 @@ flowchart TD
 ## Arquitetura Medalhão
 
 ### Bronze Layer — Dados Brutos
-- Dados ingeridos sem transformações
-- Formato Parquet particionado por `ingestao_date`
-- Histórico completo preservado
-- Bucket: `pipeline-alfabetizacao-bronze`
+- Dados ingeridos sem transformações;
+- Formato Parquet particionado por `ingestao_date`;
+- Histórico completo preservado;
+- Bucket: `pipeline-alfabetizacao-bronze`.
 
 ### Silver Layer — Dados Tratados
-- Limpeza de valores nulos
-- Padronização de tipos e categorias
-- Integração entre tabelas (resultado real + metas)
-- Nova coluna `distancia_meta_2030` calculada
-- Bucket: `pipeline-alfabetizacao-silver`
+- Limpeza de valores nulos;
+- Padronização de tipos e categorias;
+- Integração entre tabelas (resultado real + metas);
+- Nova coluna `distancia_meta_2030` calculada;
+- Bucket: `pipeline-alfabetizacao-silver`.
 
 ### Gold Layer — Camada Analítica
-- **ranking_estados**: ranking nacional por taxa de alfabetização com situação em relação à meta 2030
-- **evolucao_temporal**: variação 2023→2024 por estado com tendência
-- **analise_municipal**: agregação municipal por UF com percentual de municípios críticos
-- Bucket: `pipeline-alfabetizacao-gold`
+- **ranking_estados**: ranking nacional por taxa de alfabetização com situação em relação à meta 2030;
+- **evolucao_temporal**: variação 2023→2024 por estado com tendência;
+- **analise_municipal**: agregação municipal por UF com percentual de municípios críticos;
+- Bucket: `pipeline-alfabetizacao-gold`.
 
 ---
 
@@ -135,8 +135,8 @@ Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
 | StreamingTaxaProcessamento | 100% |
 
 ### Alarmes configurados
-- **Pipeline-QualidadeDados-Falha**: dispara quando checks de qualidade falham
-- **Pipeline-Ingestao-Falha**: dispara quando ingestão batch falha
+- **Pipeline-QualidadeDados-Falha**: dispara quando checks de qualidade falham;
+- **Pipeline-Ingestao-Falha**: dispara quando ingestão batch falha.
 
 ---
 
@@ -168,17 +168,17 @@ Métricas publicadas no CloudWatch sob o namespace `PipelineAlfabetizacao`:
 A camada Gold está preparada para alimentar modelos de ML e análises avançadas:
 
 ### Modelos preditivos
-- **Predição de alfabetização**: usar dados históricos de UF e município para prever taxa futura e antecipar municípios em risco
-- **Detecção de anomalias**: identificar quedas abruptas de desempenho, como a queda de 19 pontos do RS entre 2023 e 2024
+- **Predição de alfabetização**: usar dados históricos de UF e município para prever taxa futura e antecipar municípios em risco;
+- **Detecção de anomalias**: identificar quedas abruptas de desempenho, como a queda de 19 pontos do RS entre 2023 e 2024.
 
 ### Análise de desigualdade
-- **Clustering de vulnerabilidade**: agrupar municípios por perfil educacional para direcionar políticas públicas com mais precisão
-- **Gap regional**: o Ceará (85%) versus estados mais vulneráveis (~35%) representa uma desigualdade de 50 pontos percentuais que pode ser modelada e explicada
+- **Clustering de vulnerabilidade**: agrupar municípios por perfil educacional para direcionar políticas públicas com mais precisão;
+- **Gap regional**: o Ceará (85%) versus estados mais vulneráveis (~35%) representa uma desigualdade de 50 pontos percentuais que pode ser modelada e explicada.
 
 ### Políticas públicas baseadas em dados
-- Identificar quais fatores socioeconômicos mais influenciam a taxa de alfabetização
-- Simular o impacto de intervenções educacionais por região
-- Priorizar alocação de recursos nos 198 municípios sem meta definida
+- Identificar quais fatores socioeconômicos mais influenciam a taxa de alfabetização;
+- Simular o impacto de intervenções educacionais por região;
+- Priorizar alocação de recursos nos 198 municípios sem meta definida.
 
 ---
 
@@ -286,7 +286,7 @@ A tabela `aluno` (256MB) é acessível apenas via BigQuery por volume. A Meta Al
 
 ## Atualizações Recentes
 
-### Correções aplicadas após revisão do grupo
+### Correções aplicadas após revisões do grupo:
 
 **Fix: Integração de metas corrigida**
 O join entre indicadores e metas usava a coluna `rede` que tinha valores incompatíveis entre as tabelas. Corrigido para join por `ano` + localidade. Resultado: metas 100% preenchidas na UF e 96.5% no município.
