@@ -93,7 +93,7 @@ simulate_stream.py → SQS (pipeline-alfabetizacao-stream)
 
 
 ### Decisão arquitetural — SQS vs Kinesis
-O SQS foi escolhido por ser mais simples e econômico para o volume simulado. O Kinesis seria necessário apenas para milhões de eventos por segundo — fora do escopo deste projeto.
+O SQS foi escolhido por ser mais simples e econômico para o volume simulado. O Kinesis seria necessário apenas para milhões de eventos por segundo, fora do escopo deste projeto.
 
 ### Características
 - Eventos particionados por ano e UF
@@ -118,7 +118,7 @@ O script `quality/data_quality.py` executa 8 checks automatizados:
 | Completude — silver/municipio | ✅ 0 nulos |
 | Integridade — municipio → meta | ⚠️ 198 municípios sem meta |
 
-> **Nota**: Os 198 municípios sem correspondência de meta é uma característica real dos dados — municípios com participação insuficiente não recebem metas individualizadas pelo programa nacional. Não representa erro no pipeline.
+> **Nota**: Os 198 municípios sem correspondência de meta é uma característica real dos dados. Municípios com participação insuficiente não recebem metas individualizadas pelo programa nacional. Não representa erro no pipeline.
 
 ---
 
@@ -169,7 +169,7 @@ A camada Gold está preparada para alimentar modelos de ML e análises avançada
 
 ### Modelos preditivos
 - **Predição de alfabetização**: usar dados históricos de UF e município para prever taxa futura e antecipar municípios em risco
-- **Detecção de anomalias**: identificar quedas abruptas de desempenho — como a queda de 19 pontos do RS entre 2023 e 2024
+- **Detecção de anomalias**: identificar quedas abruptas de desempenho, como a queda de 19 pontos do RS entre 2023 e 2024
 
 ### Análise de desigualdade
 - **Clustering de vulnerabilidade**: agrupar municípios por perfil educacional para direcionar políticas públicas com mais precisão
@@ -271,16 +271,16 @@ Pós-Tech FIAP — AI Scientist
 ## Decisões Arquiteturais — Trade-offs
 
 ### Batch vs Streaming
-O batch processa dados históricos completos periodicamente — ideal para as tabelas do INEP que são publicadas anualmente. O streaming simula a chegada de novos resultados em tempo quase real — útil para futuras integrações com sistemas de avaliação contínua. A combinação híbrida cobre ambos os cenários sem custo fixo adicional.
+O batch processa dados históricos completos periodicamente — ideal para as tabelas do INEP que são publicadas anualmente. O streaming simula a chegada de novos resultados em tempo quase real, sendo útil para futuras integrações com sistemas de avaliação contínua. A combinação híbrida cobre ambos os cenários sem custo fixo adicional.
 
 ### Data Lake vs Data Warehouse
 Optamos por Data Lake (S3 + Athena) em vez de Data Warehouse (Redshift) pelos seguintes motivos: custo zero de armazenamento no volume do projeto, schema-on-read permite flexibilidade na evolução dos dados, e o formato Parquet com particionamento entrega performance comparável a um DW para as queries analíticas necessárias.
 
 ### Custo vs Performance
-A escolha serverless (Lambda, SQS, Athena) sacrifica latência de cold start em troca de custo zero quando ocioso. Para um pipeline educacional com execução diária/anual, essa troca é amplamente favorável — o projeto inteiro custou $0 de $50 disponíveis.
+A escolha serverless (Lambda, SQS, Athena) sacrifica latência de cold start em troca de custo zero quando ocioso. Para um pipeline educacional com execução diária/anual, essa troca é amplamente favorável. O projeto inteiro custou $0 de $50 disponíveis.
 
 ### Decisão de escopo das fontes
-A tabela `aluno` (256MB) é acessível apenas via BigQuery por volume. A Meta Alfabetização Brasil não existe como tabela separada na Base dos Dados — foi derivada na camada Gold como agregação nacional. Ambas as decisões estão documentadas e justificadas.
+A tabela `aluno` (256MB) é acessível apenas via BigQuery por volume. A Meta Alfabetização Brasil não existe como tabela separada na Base dos Dados, foi derivada na camada Gold como agregação nacional. Ambas as decisões estão documentadas e justificadas.
 
 ---
 
@@ -298,7 +298,7 @@ Scripts Silver e Gold agora descobrem automaticamente a partição mais recente 
 Novo script `silver_streaming.py` consolida os eventos JSON do Bronze/streaming na Silver, mantendo dados simulados separados dos indicadores oficiais.
 
 **Feat: Dataset visao_brasil na Gold**
-Novo 4º dataset analítico com agregação nacional por ano — taxa média, mediana, amplitude e distância média da meta 2030.
+Novo 4º dataset analítico com agregação nacional por ano (taxa média, mediana, amplitude e distância média da meta 2030).
 
 ### Insight revelado após correção
-Com a integração de metas corrigida, o **Ceará já atingiu a meta nacional de 2030** (85.31% vs meta de 80%) — dado que só se tornou visível após o fix.
+Com a integração de metas corrigida, o **Ceará já atingiu a meta nacional de 2030** (85.31% vs meta de 80%), dado que só se tornou visível após o fix.
